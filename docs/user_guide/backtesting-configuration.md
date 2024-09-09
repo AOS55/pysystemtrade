@@ -359,7 +359,7 @@ with open(filename, 'w') as outfile:
 This is useful if you've been playing with a backtest configuration, and want
 to record the changes you've made. Note this will save trading rule functions
 as functions; this may not work and it will also be ugly. So you should use
-strings to define rule functions (see [rules](#rules) for more information)
+strings to define rule functions (see [rules](backtesting-stages.md#rules) for more information)
 
 You can also save the final optimised parameters into fixed weights for live trading:
 
