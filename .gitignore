@@ -10,6 +10,9 @@ build
 private
 restats
 
+# Doc Site
+site/
+
 # Coverage reports
 .coverage
 .coverage.*

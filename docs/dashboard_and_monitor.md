@@ -7,10 +7,11 @@ It will make no sense unless you've already read:
 Table of Contents
 =================
 
-* [Web Dashboard](#web-dashboard)
-* [System monitor](#system-monitor)
-* [Handling of crashed processes](#handling-of-crashed-processes)
-* [Running a remote dashboard or monitor](#running-a-remote-dashboard-or-monitor)
+- [Table of Contents](#table-of-contents)
+- [Web Dashboard](#web-dashboard)
+- [System monitor](#system-monitor)
+- [Handling of crashed processes](#handling-of-crashed-processes)
+- [Running a remote dashboard or monitor](#running-a-remote-dashboard-or-monitor)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
@@ -23,7 +24,7 @@ At the moment, the dashboard provides basic diagnostic "traffic lights" to show 
 
 If you have installed all of the Python dependencies listed in the `requirement.txt` file, the web dashboard is ready to be started:
 
-```
+```bash
 cd pysystemtrade/dashboard
 python3 app.py
 ```
@@ -37,7 +38,7 @@ Visit `http://localhost:5000/` to view the dashboard. To remap this location or 
 
 Alternatively, there is a simple monitoring tool which also outputs an .html file and only shows which processes are running. To use it, add the following two commands to your crontab on reboot, or run manually eg using [screen](https://linuxize.com/post/how-to-use-linux-screen/):
 
-```
+```bash
 cd ~pysystemtrade/private/; python3 -m http.server
 cd ~pysystemtrade/syscontrol/; python3 monitor.py
 ```

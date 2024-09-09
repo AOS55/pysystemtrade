@@ -1,0 +1,68 @@
+site_name: PySystemTrade
+site_url: https://pysystemtrade.org/
+site_description: PySystemTrade documentation
+extra_css:
+  - stylesheets/extra.css
+
+repo_url: https://github.com/robcarver17/pysystemtrade/tree/master/docs
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.tabs.sticky
+    - navigation.top
+    - content.code.copy
+  
+  # palette:
+  #   # Light mode
+  #   - scheme: default
+  #     primary: dark blue
+  #     accent: dark blue
+  #     toggle:
+  #       icon: material/weather-sunny
+  #       name: Switch to dark mode
+
+  #   # Dark mode
+  #   - scheme: slate
+  #     primary: teal
+  #     accent: teal
+  #     toggle:
+  #       icon: material/weather-night
+  #       name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+      linenums: true
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Install: installation.md
+  - Getting Started: introduction.md
+  - User Guide:
+    - Overview: user_guide/overview.md
+    - Backtesting: 
+      - Overview: user_guide/backtesting/overview.md
+      - Data: user_guide/backtesting/data.md
+      - Config: user_guide/backtesting/configuration.md
+      - System: user_guide/backtesting/system.md
+      - Stages: user_guide/backtesting/stages.md
+      - Processes: user_guide/backtesting/process.md
+      - Reference: user_guide/backtesting/reference.md 
+      - FAQ: user_guide/backtesting/faq.md
+    - Instruments: user_guide/instruments.md
+    - Data: user_guide/data.md
+    - Interactive Brokers: user_guide/IB.md
+    - Production: user_guide/production.md 
+  - Tutorials:
+    - Simple Trading Rule: tutorials/asimpletradingrule.ipynb
+    - Prebaked System: tutorials/prebakedsystems.py
+  - FAQs: faq.md
+  - Bibliography: bibliography.md
+
+plugins:
+    - mkdocs-jupyter

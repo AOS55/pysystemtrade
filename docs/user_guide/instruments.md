@@ -6,7 +6,7 @@ It will make no sense unless you've already read:
 - [Storing futures and spot FX data](/docs/data.md)
 - [Using pysystemtrade in production(/docs/production.md)
 
-Table of Contents
+<!-- Table of Contents
 =================
 
 * [Different instrument sets](#different-instrument-sets)
@@ -28,7 +28,7 @@ Table of Contents
 * [Deciding which are 'bad' markets](#deciding-which-are-bad-markets)
    * [Check slippage costs are accurate](#check-slippage-costs-are-accurate)
    * [Get list of bad markets](#get-list-of-bad-markets)
-* [Deciding which duplicate instruments to use](#deciding-which-duplicate-instruments-to-use)
+* [Deciding which duplicate instruments to use](#deciding-which-duplicate-instruments-to-use) -->
 
 
 
