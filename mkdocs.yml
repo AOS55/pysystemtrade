@@ -33,11 +33,14 @@ theme:
   #       name: Switch to light mode
 
 markdown_extensions:
+  - admonition
   - pymdownx.highlight:
       anchor_linenums: true
       pygments_lang_class: true
       linenums: true
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 nav:
   - Home: index.md
@@ -46,14 +49,14 @@ nav:
   - User Guide:
     - Overview: user_guide/overview.md
     - Backtesting: 
-      - Overview: user_guide/backtesting/overview.md
-      - Data: user_guide/backtesting/data.md
-      - Config: user_guide/backtesting/configuration.md
-      - System: user_guide/backtesting/system.md
-      - Stages: user_guide/backtesting/stages.md
-      - Processes: user_guide/backtesting/process.md
-      - Reference: user_guide/backtesting/reference.md 
-      - FAQ: user_guide/backtesting/faq.md
+      - Overview: user_guide/backtesting-overview.md
+      - Data: user_guide/backtesting-data.md
+      - Config: user_guide/backtesting-configuration.md
+      - System: user_guide/backtesting-system.md
+      - Stages: user_guide/backtesting-stages.md
+      - Processes: user_guide/backtesting-process.md
+      - Reference: user_guide/backtesting-reference.md 
+      - FAQ: user_guide/backtesting-faq.md
     - Instruments: user_guide/instruments.md
     - Data: user_guide/data.md
     - Interactive Brokers: user_guide/IB.md
@@ -66,3 +69,4 @@ nav:
 
 plugins:
     - mkdocs-jupyter
+    - search

@@ -5,14 +5,15 @@ or nested groups of parameters.
 
 ### Creating a configuration object
 
-There are three main ways to create a configuration object:
+There are 5 main ways to create a configuration object:
 
-1. Interactively from a dictionary
-2. By pulling in a YAML file
-3. From a 'pre-baked' system
-4. By joining together multiple configurations in a list
+1. [Interactively from a dictionary](#creating-a-configuration-object-with-a-dictionary)
+2. [By pulling in a YAML file](#creating-a-configuration-object-from-a-file)
+3. [From a 'pre-baked' system](#creating-a-configuration-object-from-a-pre-baked-system)
+4. [By joining together multiple configurations in a list](#creating-a-configuration-object-from-a-list)
+5. [From a CSV file](#creating-configuration-files-from-csv-files)
 
-#### 1) Creating a configuration object with a dictionary
+#### Creating a configuration object with a dictionary
 
 ```python
 from sysdata.config.configdata import Config
@@ -23,10 +24,10 @@ my_config=Config(my_config_dict)
 
 There are no restrictions on what is nested in the dictionary, but if you
 include arbitrary items like the above they won't be very useful!. The section
-on [configuration options](#Configuration_options) explains what configuration
+on [configuration options](backtesting-reference.md#configuration-options) explains what configuration
 options would be used by a system.
 
-#### 2) Creating a configuration object from a file
+#### Creating a configuration object from a file
 
 This simple file will reproduce the useless config we get from a dictionary in
 the example above.
@@ -34,27 +35,28 @@ the example above.
 ```yaml
 optionone: 1
 optiontwo:
-  a: 3.0
-  b: "beta"
-  c:
-    - "a"
-    - "b"
+a: 3.0
+b: "beta"
+c:
+   - "a"
+   - "b"
 optionthree:
-  - 1.0
-  - 2.0
+- 1.0
+- 2.0
 ```
 
-Note that as with python the indentation in a yaml file shows how things are
-nested. If you want to learn more about yaml check [this
-out](https://pyyaml.org/wiki/PyYAMLDocumentation#YAMLsyntax).
+!!! note
+
+      As with python the indentation in a yaml file shows how things are
+      nested. If you want to learn more about yaml check [this
+      out](https://pyyaml.org/wiki/PyYAMLDocumentation#YAMLsyntax).
 
 ```python
 from sysdata.config.configdata import Config
 my_config=Config("private.filename.yaml") ## assuming the file is in "pysystemtrade/private/filename.yaml"
 ```
 
-See [here](#filenames) for how to specify filenames in pysystemtrade.
-
+See [here](backtesting-process.md#file-names) for how to specify filenames in pysystemtrade.
 
 In theory there are no restrictions on what is nested in the dictionary (but
 the top level must be a dict); although it is easier to use str, float, int,
@@ -65,11 +67,11 @@ pretty).
 You should respect the structure of the default config with respect to nesting, as
 otherwise [the defaults](#defaults_how) won't be properly filled in.
 
-The section on [configuration options](#Configuration_options) explains what
+The section on [configuration options](backtesting-reference.md#configuration-options) explains what
 configuration options are available.
 
 
-#### 3) Creating a configuration object from a pre-baked system
+#### Creating a configuration object from a pre-baked system
 
 ```python
 from systems.provided.futures_chapter15.basesystem import futures_system
@@ -77,14 +79,14 @@ system=futures_system()
 new_config=system.config
 ```
 
-Under the hood this is effectively getting a configuration from a .yaml file -
-[this one](/systems/provided/futures_chapter15/futuresconfig.yaml).
+Under the hood this is effectively getting a configuration from a .yaml file - 
+[this one](https://github.com/robcarver17/pysystemtrade/blob/master/systems/provided/futures_chapter15/futuresconfig.yaml).
 
 Configs created in this way will include all [the defaults
 populated](#defaults_how).
 
 
-#### 4) Creating a configuration object from a list
+#### Creating a configuration object from a list
 
 We can also pass a list into `Config()`, where each item of the list contains a
 dict or filename. For example we could do this with the simple filename example
@@ -97,13 +99,12 @@ my_config_dict=dict(optionfour=1, optionfive=dict(one=1, two=2.0))
 my_config=Config(["filename.yaml", my_config_dict])
 ```
 
-Note that if there are overlapping keynames, then those in latter parts of the
-list of configs will override earlier versions.
+!!! note
+   
+      If there are overlapping keynames, then those in latter parts of the list of configs will override earlier versions.
+      This can be useful if, for example, we wanted to change the instrument weights *on the fly* but keep the rest of the configuration unchanged.
 
-This can be useful if, for example, we wanted to change the instrument weights
-'on the fly' but keep the rest of the configuration unchanged.
-
-#### 5) Creating configuration files from .csv files
+#### Creating configuration files from .csv files
 
 Sometimes it is more convenient to specify certain parameters in a .csv file, then push them into a .yaml file. If you want to use this method then you can use these two functions:
 
@@ -115,23 +116,23 @@ from sysinit.configtools.csvweights_to_yaml import forecast_mapping_csv_to_yaml 
 
 These will create .yaml files which can then be pasted into your existing configuration files.
 
-
 <a name="defaults"> </a>
 
 ### Project defaults and private configuration
 
 Many (but not all) configuration parameters have defaults which are used by the
 system if the parameters are not in the object. These can be found in the
-[defaults.yaml file](/sysdata/config/defaults.yaml). The section on
+[defaults.yaml file](https://github.com/robcarver17/pysystemtrade/blob/master/systems/provided/futures_chapter15/futuresconfig.yaml). The section on
 [configuration options](#Configuration_options) explains what the defaults are,
 and where they are used.
 
-I recommend that you do not change these defaults. It's better to use the
-settings you want in each system configuration file, or use a private configuration file if this is something you want to apply to all your backtests.
+!!! Warning
+      I recommend that you do not change these defaults. It's better to use the
+      settings you want in each system configuration file, or use a private configuration file if this is something you want to apply to all your backtests.
 
-If this file exists, `/private/private_config.yaml`, it will be used as a private configuration file.
+      If this file exists, `/private/private_config.yaml`, it will be used as a private configuration file.
 
-Basically, whenever a configuration object is added to a system, if there is a private config file then we add the elements from that. Then for any remaining missing elements we add the elements from the defaults.yaml.
+      Basically, whenever a configuration object is added to a system, if there is a private config file then we add the elements from that. Then for any remaining missing elements we add the elements from the defaults.yaml.
 
 
 <a name="config_function_defaults"> </a>
@@ -178,7 +179,7 @@ my_config=Config()
 print(my_config) ## empty config
 ```
 
-```
+``` bash
  Config with elements:
 ```
 
@@ -204,7 +205,7 @@ populated by the defaults:
 system.accounts.portfolio()
 ```
 
-```
+```bash
 # deleted full error trace
 Exception: A system config needs to include trading_rules, unless rules are passed when object created
 ```
@@ -317,7 +318,7 @@ include new configuration options. Here's what your code should do:
 
 You would then need to add the following kind of thing to your config file:
 
-```
+```yaml
 my_config_item: "ni"
 my_config_dict:
    US10: 45.0
@@ -329,7 +330,7 @@ my_config_list:
 
 Similarly if you wanted to use project defaults for your new parameters you'll
 also need to include them in the [defaults.yaml
-file](/sysdata/config/defaults.yaml). Make sure you understand [how the
+file](https://github.com/robcarver17/pysystemtrade/blob/master/systems/provided/futures_chapter15/futuresconfig.yaml). Make sure you understand [how the
 defaults work](#defaults_how).
 
 
@@ -369,12 +370,13 @@ from systems.diagoutput import systemDiag
 
 sysdiag = systemDiag(system)
 sysdiag.yaml_config_with_estimated_parameters('someyamlfile.yaml',
-                                              attr_names=['forecast_scalars',
-                                                                  'forecast_weights',
-                                                                  'forecast_div_multiplier',
-                                                                  'forecast_mapping',
-                                                                  'instrument_weights',
-                                                                  'instrument_div_multiplier'])
+   attr_names=['forecast_scalars',
+   'forecast_weights',
+   'forecast_div_multiplier',
+   'forecast_mapping',
+   'instrument_weights',
+   'instrument_div_multiplier']
+)
 
 ```
 Change the list of attr_names depending on what you want to output. You can then merge the resulting .yaml file into your simulated .yaml file. Don't forget to turn off the flags for `use_forecast_div_mult_estimates`,`use_forecast_scale_estimates`,`use_forecast_weight_estimates`,`use_instrument_div_mult_estimates`, and `use_instrument_weight_estimates`.  You don't need to change flag for forecast mapping, since this isn't done by default.

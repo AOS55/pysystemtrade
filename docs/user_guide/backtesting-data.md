@@ -9,7 +9,7 @@ particular **source** (for example .csv files, databases and so on).
 Two kinds of specific data object is currently provided with the system in the
 current version - `csvFuturesSimData` (.csv files) and `dbFuturesSimData` (database storage)
 
-See [working with futures data](/docs/data.md)
+See [working with futures data](data.md)
 
 #### Generic data objects
 
@@ -112,7 +112,7 @@ the instrument_code):
 1. Static configuration and cost data- `instrument_config.csv` headings: Instrument, Pointsize,
    AssetClass, Currency. Additional headings for costs: Slippage, PerBlock,
    Percentage, PerTrade. See ['costs'](#costs) for more detail.
-2. Roll parameters data. See [storing futures and spot FX data](/docs/data.md) for more detail.
+2. Roll parameters data. See [storing futures and spot FX data](data.md) for more detail.
 3. Adjusted price data- `code.csv` (eg SP500.csv) headings: DATETIME, PRICE
 4. Carry and forward data - `code.csv` (eg AEX.csv): headings:
    DATETIME, PRICE,CARRY,FORWARD,CARRY_CONTRACT PRICE_CONTRACT, FORWARD_CONTRACT
@@ -132,6 +132,7 @@ be used to work out implied cross rates.
 
 See data in subdirectories [pysystemtrade/data/futures](/data/futures) for files you can modify:
 
+<!-- Needs to be the external link to directory on master -->
 - [adjusted prices](/data/futures/adjusted_prices_csv),
 - [configuration and costs](/data/futures/csvconfig),
 - [Futures specific carry and forward prices](/data/futures/multiple_prices_csv)
