@@ -14,3 +14,7 @@ To locally test mkdocs, the best option is to run on the serve command with:
 ```bash
 mkdocs serve -a <0.0.0.0:unused_port>
 ```
+
+## Requirmenets
+- mkdocs-material
+- mkdocs-jupyter
