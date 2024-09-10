@@ -60,7 +60,16 @@ nav:
     - Instruments: user_guide/instruments.md
     - Data: user_guide/data.md
     - Interactive Brokers: user_guide/IB.md
-    - Production: user_guide/production.md 
+    - Production: 
+      - Overview: user_guide/production-overview.md
+      - QuickStart: user_guide/production-quickstart.md
+      - System: user_guide/production-system.md
+      - Positions: user_guide/production-positions.md
+      - Scripts: user_guide/production-scripts.md
+      - Scheduling: user_guide/production-scheduling.md
+      - Reference: user_guide/production-system_concepts.md
+      - Recovery: user_guide/production-crash.md
+      - Reports: user_guide/production-reports.md 
   - Tutorials:
     - Simple Trading Rule: tutorials/asimpletradingrule.ipynb
     - Prebaked System: tutorials/prebakedsystems.py
