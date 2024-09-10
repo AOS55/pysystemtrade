@@ -455,7 +455,7 @@ def run_app(cfg):
                     dbc.NavLink("Instruments", href="/instruments", active="exact"),
                     dbc.NavLink("Rules and Forecasts", href="/rules", active="exact"),
                     dbc.NavLink("Position Sizing", href="/sizing", active="exact"),
-                    dbc.NavLine("Risk", href="/risk", active="exact"),
+                    dbc.NavLink("Risk", href="/risk", active="exact"),
                     dbc.NavLink("Performance", href="/performance", active="exact"),
                 ],
                 vertical=True,
