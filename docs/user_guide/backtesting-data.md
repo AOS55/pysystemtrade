@@ -1,73 +1,65 @@
 # Data
 
-A data object is used to feed data into a system. Data objects work with a
-particular **kind** of data (normally asset class specific, eg futures) from a
-particular **source** (for example .csv files, databases and so on).
+A data object is used to provide data to a system. Data objects are designed to work with a specific **type** of data, typically based on the asset class (e.g., futures), and from a specific **source** (e.g., CSV files, databases, etc.).
 
-### Using the standard data objects
+## Using the Standard Data Objects
 
-Two kinds of specific data object is currently provided with the system in the
-current version - `csvFuturesSimData` (.csv files) and `dbFuturesSimData` (database storage)
+PySystemTrade provides two types of specific data objects in the current version:
 
-See [working with futures data](data.md)
+- `csvFuturesSimData` for .csv files
+- `dbFuturesSimData` for database storage
 
-#### Generic data objects
+For working with futures data, refer to [this guide](data.md).
 
-You can import and use data objects directly:
+### Generic Data Objects
 
-*These commands will work with all data objects - the `csvFuturesSimData` version is
-used as an example.*
+You can directly import and use data objects as follows (using `csvFuturesSimData` as an example):
 
 ```python
 from sysdata.sim.csv_futures_sim_data import csvFuturesSimData
 
-data=csvFuturesSimData()
+data = csvFuturesSimData()
 
-## getting data out
-data.methods() ## list of methods
+# Getting data out
+data.methods()  # List of methods
 
 data.get_raw_price(instrument_code)
-data[instrument_code] ## does the same thing as get_raw_price
+data[instrument_code]  # Same as get_raw_price
 
 data.get_instrument_list()
-data.keys() ## also gets the instrument list
+data.keys()  # Also gets the instrument list
 
 data.get_value_of_block_price_move(instrument_code)
 data.get_instrument_currency(instrument_code)
-data.get_fx_for_instrument(instrument_code, base_currency) # get fx rate between instrument currency and base currency
-
+data.get_fx_for_instrument(instrument_code, base_currency)  # Get fx rate between instrument currency and base currency
 ```
 
-Or within a system:
+You can also use data objects within a system:
 
 ```python
-## using with a system
+## Using with a system
 from systems.provided.futures_chapter15.basesystem import futures_system
-system=futures_system(data=data)
+system = futures_system(data=data)
 
-system.data.get_instrument_currency(instrument_code) # and so on
+system.data.get_instrument_currency(instrument_code) # And so on
 ```
 
-(Note that when specifying a data item within a trading [rule](#rules) you
-should omit the system eg `data.get_raw_price`)
+(Note: When specifying a data item within a trading [rule](#rules), omit the system, e.g., `data.get_raw_price`)
 
-If you set the start_date configuration option, then only a subset of the data will be shown:
-
+If you set the `start_date` configuration option, only a subset of the data will be shown:
 
 ```python
-## using with a system
+## Using with a system
 from systems.provided.futures_chapter15.basesystem import futures_system
-system=futures_system(data=data)
+system = futures_system(data=data)
 
-# We could also do this in the .yaml file. Note the formatting used must be the same
+# We could also do this in the .yaml file. Note that the formatting used must be the same
 system.config.start_date = '2000-01-19'
 
-## or as a datetime (won't work in yaml obviously)
+## Or as a datetime (won't work in yaml obviously)
 import datetime
 system.config.start_date = datetime.datetime(2000,1,19)
 ```
-
-
 
 <a name="csvdata"> </a>
 
@@ -110,14 +102,14 @@ Each relevant pathname must contain .csv files of the following four types (wher
 the instrument_code):
 
 1. Static configuration and cost data- `instrument_config.csv` headings: Instrument, Pointsize,
-   AssetClass, Currency. Additional headings for costs: Slippage, PerBlock,
-   Percentage, PerTrade. See ['costs'](#costs) for more detail.
+  AssetClass, Currency. Additional headings for costs: Slippage, PerBlock,
+  Percentage, PerTrade. See ['costs'](#costs) for more detail.
 2. Roll parameters data. See [storing futures and spot FX data](data.md) for more detail.
 3. Adjusted price data- `code.csv` (eg SP500.csv) headings: DATETIME, PRICE
 4. Carry and forward data - `code.csv` (eg AEX.csv): headings:
-   DATETIME, PRICE,CARRY,FORWARD,CARRY_CONTRACT PRICE_CONTRACT, FORWARD_CONTRACT
+  DATETIME, PRICE,CARRY,FORWARD,CARRY_CONTRACT PRICE_CONTRACT, FORWARD_CONTRACT
 5. Currency data - `ccy1ccy2fx.csv` (eg AUDUSDfx.csv) headings: DATETIME,
-   FXRATE
+  FXRATE
 
 DATETIME should be something that `pandas.to_datetime` can parse. Note that the
 price in (2) is the continuously stitched price (see [volatility
@@ -144,7 +136,7 @@ For more information see the [futures data document](/docs/data.md#csvFuturesSim
 
 #### The arcticSimData object
 
-This is a simData object which gets it's data out of [Mongo DB](https://mongodb.com) (static) and [Arctic](https://github.com/manahl/arctic) (time series) (*Yes the class name should include both terms. Yes I shortened it so it isn't ridiculously long, and most of the interesting stuff comes from Arctic*). It is better for live trading.
+This is a simData object which gets its data out of [Mongo DB](https://mongodb.com) (static) and [Arctic](https://github.com/manahl/arctic) (time series) (*Yes the class name should include both terms. Yes I shortened it so it isn't ridiculously long, and most of the interesting stuff comes from Arctic*). It is better for live trading.
 
 For production code, and storing large amounts of data (eg for individual futures contracts) we probably need something more robust than .csv files.
 [MongoDB](https://mongodb.com) is a no-sql database which is rather fashionable at the moment, though the main reason I selected it for this purpose is that it is used by Arctic. [Arctic](https://github.com/manahl/arctic) is a superb open source time series database which sits on top of Mongo DB) and provides straightforward and fast storage of pandas DataFrames. It was created by my former colleagues at [Man AHL](https://www.ahl.com/) (in fact I beta tested a very early version of Arctic), and then very generously released as open source.
@@ -231,3 +223,4 @@ Neither should you override 'daily_prices'.
 
 Finally data methods should not do any caching. [Caching](#caching) is done
 within the system class.
+

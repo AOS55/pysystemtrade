@@ -2,7 +2,6 @@ Configuration (`config`) objects determine how a system behaves. Configuration
 objects are very simple; they have attributes which contain either parameters,
 or nested groups of parameters.
 
-
 ### Creating a configuration object
 
 There are 5 main ways to create a configuration object:
